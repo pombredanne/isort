@@ -35,18 +35,42 @@ except ImportError:
         def run(self):
             raise SystemExit(subprocess.call([sys.executable, 'runtests.py']))
 
+with open('README.rst', 'r') as f:
+    readme = f.read()
 
 setup(name='isort',
-      version='2.4.0',
+      version='4.2.14',
       description='A Python utility / library to sort Python imports.',
+      long_description=readme,
       author='Timothy Crosley',
       author_email='timothy.crosley@gmail.com',
       url='https://github.com/timothycrosley/isort',
-      download_url='https://github.com/timothycrosley/isort/archive/2.4.0.tar.gz',
       license="MIT",
-      scripts=['scripts/isort'],
+      entry_points={
+        'console_scripts': [
+            'isort = isort.main:main',
+        ],
+        'distutils.commands': ['isort = isort.main:ISortCommand'],
+        'pylama.linter': ['isort = isort.pylama_isort:Linter'],
+      },
       packages=['isort'],
-      requires=['pies', 'natsort'],
-      install_requires=['pies>=1.0.3', 'natsort>=3.0.0'],
       cmdclass={'test': PyTest},
+      keywords='Refactor, Python, Python2, Python3, Refactoring, Imports, Sort, Clean',
+      classifiers=['Development Status :: 6 - Mature',
+                   'Intended Audience :: Developers',
+                   'Natural Language :: English',
+                   'Environment :: Console',
+                   'License :: OSI Approved :: MIT License',
+                   'Programming Language :: Python',
+                   'Programming Language :: Python :: 2',
+                   'Programming Language :: Python :: 2.7',
+                   'Programming Language :: Python :: 3',
+                   'Programming Language :: Python :: 3.3',
+                   'Programming Language :: Python :: 3.4',
+                   'Programming Language :: Python :: 3.5',
+                   'Programming Language :: Python :: 3.6',
+                   'Programming Language :: Python :: Implementation :: CPython',
+                   'Programming Language :: Python :: Implementation :: PyPy',
+                   'Topic :: Software Development :: Libraries',
+                   'Topic :: Utilities'],
       **PyTest.extra_kwargs)

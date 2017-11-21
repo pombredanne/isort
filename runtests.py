@@ -1,4 +1,8 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
+
+# Skip linting this file until it's cleaned up:
+# https://github.com/timothycrosley/isort/issues/554
+# flake8: noqa
 
 sources = """
 eNrcvWmXG1l2INYzY1tjeGYk2ePtg32iQVGIKCKDSXZpyylUqVRFqqmuYvFwUVPOSoGRQGRmNJER
@@ -2677,6 +2681,7 @@ class DictImporter(object):
         if res is None:
             res = self.sources.get(name + '.__init__')
         return res
+
 
 if __name__ == "__main__":
     if sys.version_info >= (3, 0):
